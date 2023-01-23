@@ -10,7 +10,7 @@ const headerLinks = ref([
 
 <template>
   <header>
-    <div class="container max-5xl py-4 flex justify-between items-center">
+    <div class="container max-w-6xl py-4 flex justify-between items-center">
       <h2 class="text-xl font-semibold">Portal</h2>
       <nav>
         <ul class="flex items-center gap-4">
