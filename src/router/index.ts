@@ -9,7 +9,22 @@ const router = createRouter({
       name: "home",
       component: HomeView,
     },
+    {
+      path: "/login",
+      name: "login",
+      component: () => import("../views/LoginView.vue"),
+      meta: {
+        title: "Login",
+      },
+    },
   ],
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.title) {
+    document.title = `${to.meta.title} | Portal`;
+  }
+  next();
 });
 
 export default router;

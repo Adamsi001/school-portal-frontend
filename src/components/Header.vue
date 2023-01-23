@@ -19,9 +19,15 @@ const headerLinks = ref([
           </li>
         </ul>
       </nav>
-      <router-link to="/login" class="px-4 py-2 text-white bg-blue-500">
+      <router-link v-if="true" to="/login" class="btn-primary">
         Login
       </router-link>
+      <div v-else class="flex gap-2 items-center">
+        <button class="w-6 h-6 rounded-full bg-slate-900"></button>
+        <router-link to="/dashboard" class="btn-primary">
+          Dashboard
+        </router-link>
+      </div>
     </div>
   </header>
 </template>
