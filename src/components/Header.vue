@@ -19,7 +19,7 @@ const headerLinks = ref([
           </li>
         </ul>
       </nav>
-      <router-link v-if="true" to="/login" class="btn-primary">
+      <router-link v-if="false" to="/login" class="btn-primary">
         Login
       </router-link>
       <div v-else class="flex gap-2 items-center">

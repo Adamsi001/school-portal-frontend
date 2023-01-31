@@ -17,12 +17,22 @@ const router = createRouter({
         title: "Login",
       },
     },
+    {
+      path: "/dashboard",
+      name: "dashboard",
+      component: () => import("../views/DashboardView.vue"),
+      meta: {
+        title: "Dashboard",
+      },
+    },
   ],
 });
 
 router.beforeEach((to, from, next) => {
   if (to.meta.title) {
     document.title = `${to.meta.title} | Portal`;
+  } else {
+    document.title = "Portal";
   }
   next();
 });
