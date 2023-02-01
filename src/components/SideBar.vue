@@ -13,7 +13,7 @@ const dashboard_links = ref([
   <div
     class="h-full bg-slate-900 text-white p-4 rounded-xl flex flex-col justify-between shadow-md"
   >
-    <h1 class="text-xl my-4 font-medium">Portal</h1>
+    <h1 class="text-xl m-4 font-medium">Portal</h1>
     <nav class="flex-1 py-10">
       <ul class="flex flex-col gap-1">
         <li v-for="link in dashboard_links" :key="link.href" class="capitalize">
@@ -35,6 +35,12 @@ const dashboard_links = ref([
         </li>
       </ul>
     </nav>
-    <h2>Some Name</h2>
+    <div class="flex gap-4 items-center">
+      <div class="w-[40px] h-[40px] rounded-full bg-white/60"></div>
+      <div>
+        <h2 class="text-lg text-ellipsis">Hi, Ibrahim</h2>
+        <p class="opacity-80 text-sm">student</p>
+      </div>
+    </div>
   </div>
 </template>
