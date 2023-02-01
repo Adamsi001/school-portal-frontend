@@ -12,7 +12,7 @@ const router = createRouter({
     {
       path: "/login",
       name: "login",
-      component: () => import("../views/LoginView.vue"),
+      component: () => import("../views/auth/LoginView.vue"),
       meta: {
         title: "Login",
       },
@@ -20,10 +20,17 @@ const router = createRouter({
     {
       path: "/dashboard",
       name: "dashboard",
-      component: () => import("../views/DashboardView.vue"),
+      component: () => import("../views/dashboard/App.vue"),
       meta: {
         title: "Dashboard",
       },
+      children: [
+        {
+          path: "",
+          name: "dashboard-index",
+          component: () => import("../views/dashboard/DashboardView.vue"),
+        },
+      ],
     },
   ],
 });
