@@ -1,6 +1,6 @@
 <template>
   <p>
-    <RouterLink to="/dashboard/announcements" class="link"
+    <RouterLink to="/announcements" class="link"
       >&lt; Back to Announcements</RouterLink
     >
   </p>

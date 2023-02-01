@@ -18,7 +18,7 @@ const dashboard_links = ref([
       <ul class="flex flex-col gap-1">
         <li v-for="link in dashboard_links" :key="link.href" class="capitalize">
           <router-link
-            :to="`/dashboard${link.href}`"
+            :to="link.href"
             class="group p-4 rounded-md hover:bg-slate-800 transition-default flex justify-between"
           >
             <p>
