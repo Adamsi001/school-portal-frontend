@@ -4,7 +4,7 @@
       class="container max-w-7xl grid grid-cols-5 gap-6 min-h-screen py-4"
     >
       <SideBar />
-      <div class="col-span-4 space-y-6">
+      <div class="col-span-4 space-y-6 pt-4">
         <RouterView />
       </div>
     </section>

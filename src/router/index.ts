@@ -30,6 +30,25 @@ const router = createRouter({
           name: "dashboard-index",
           component: () => import("../views/dashboard/DashboardView.vue"),
         },
+        {
+          path: "announcements",
+          name: "announcements",
+          component: () => import("../views/dashboard/announcements/App.vue"),
+          children: [
+            {
+              path: "",
+              name: "announcements-list",
+              component: () =>
+                import("../views/dashboard/announcements/List.vue"),
+            },
+            {
+              path: "detail",
+              name: "announcement-detail",
+              component: () =>
+                import("../views/dashboard/announcements/Detail.vue"),
+            },
+          ],
+        },
       ],
     },
   ],
