@@ -12,6 +12,15 @@
   .btn-primary {
     @apply btn text-white bg-blue-500 hover:bg-blue-400;
   }
+  .card {
+    @apply p-8 shadow-md rounded-md space-y-2 bg-white;
+  }
+  .card-title {
+    @apply text-2xl font-semibold capitalize;
+  }
+  .card-subtitle {
+    @apply opacity-70;
+  }
   input[type="password"],
   input[type="text"] {
     @apply p-4 bg-slate-900/10 rounded-xl;
