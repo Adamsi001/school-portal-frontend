@@ -57,7 +57,8 @@ const courses = [
 </script>
 
 <style scoped>
-td {
+td,
+th {
   padding: 8px;
 }
 </style>

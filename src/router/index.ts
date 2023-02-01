@@ -90,6 +90,14 @@ const router = createRouter({
             },
           ],
         },
+        {
+          path: "results",
+          name: "results",
+          component: () => import("../views/dashboard/ResultsView.vue"),
+          meta: {
+            title: "Results",
+          },
+        },
       ],
     },
   ],
