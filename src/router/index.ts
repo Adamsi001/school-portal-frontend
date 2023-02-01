@@ -31,6 +31,44 @@ const router = createRouter({
           component: () => import("../views/dashboard/DashboardView.vue"),
         },
         {
+          path: "courses",
+          name: "courses",
+          component: () => import("../views/dashboard/courses/App.vue"),
+          children: [
+            {
+              path: "registrations",
+              name: "course-registration",
+              component: () =>
+                import("../views/dashboard/courses/registrations/App.vue"),
+              meta: {
+                title: "Course",
+              },
+              children: [
+                {
+                  path: "",
+                  name: "course-registration",
+                  component: () =>
+                    import(
+                      "../views/dashboard/courses/registrations/Registrations.vue"
+                    ),
+                  meta: {
+                    title: "Course Registration",
+                  },
+                },
+                {
+                  path: "new",
+                  name: "new-course-registration",
+                  component: () =>
+                    import("../views/dashboard/courses/registrations/New.vue"),
+                  meta: {
+                    title: "New Course Registration",
+                  },
+                },
+              ],
+            },
+          ],
+        },
+        {
           path: "announcements",
           name: "announcements",
           component: () => import("../views/dashboard/announcements/App.vue"),
@@ -40,6 +78,9 @@ const router = createRouter({
               name: "announcements-list",
               component: () =>
                 import("../views/dashboard/announcements/List.vue"),
+              meta: {
+                title: "Announcements",
+              },
             },
             {
               path: "detail",
@@ -55,6 +96,12 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
+  const isAuthenticated = true;
+  if (!isAuthenticated && to.name !== "login") {
+    next({ name: "login", query: { redirect: to.path } });
+    return;
+  }
+
   if (to.meta.title) {
     document.title = `${to.meta.title} | Portal`;
   } else {

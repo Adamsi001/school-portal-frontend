@@ -4,7 +4,7 @@ import { ref } from "vue-demi";
 const dashboard_links = ref([
   { title: "dashboard", href: "/" },
   { title: "announcements", href: "/announcements" },
-  { title: "course registration", href: "/course-registration" },
+  { title: "course registration", href: "/courses/registrations" },
   { title: "results", href: "/results" },
 ]);
 </script>
