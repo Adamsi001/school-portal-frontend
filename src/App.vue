@@ -7,7 +7,7 @@ import Footer from "./components/Footer.vue";
 <template>
   <div class="flex flex-col justify-between min-h-screen">
     <!-- <Header /> -->
-    <div class="flex-1">
+    <div class="flex-1 bg-slate-200">
       <RouterView />
     </div>
     <!-- <Footer /> -->
