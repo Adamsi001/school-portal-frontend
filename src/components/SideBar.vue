@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { useUserStore } from "@/stores/user";
+import { computed } from "vue-demi";
+import { useRoute } from "vue-router";
 const { user } = useUserStore();
+
+const route = useRoute();
 
 const dashboard_links: { [key: string]: { title: string; href: string }[] } = {
   student: [
@@ -20,7 +24,7 @@ const dashboard_links: { [key: string]: { title: string; href: string }[] } = {
 
 <template>
   <div
-    class="h-full bg-slate-900 text-white p-4 rounded-xl flex flex-col justify-between shadow-md"
+    class="sidebar h-full bg-slate-900 text-white p-4 rounded-xl flex flex-col justify-between shadow-md"
   >
     <h1 class="text-xl m-4 font-medium">Portal</h1>
     <nav class="flex-1 py-10">
@@ -32,7 +36,13 @@ const dashboard_links: { [key: string]: { title: string; href: string }[] } = {
         >
           <router-link
             :to="link.href"
-            class="group p-4 rounded-md hover:bg-slate-800 transition-default flex justify-between"
+            class="group p-4 rounded-md transition-default flex justify-between"
+            :class="
+              route.path == link.href ||
+              (link.href != '/' && route.path.startsWith(link.href))
+                ? 'active-link'
+                : 'hover:bg-slate-800'
+            "
           >
             <p>
               {{ link.title }}
