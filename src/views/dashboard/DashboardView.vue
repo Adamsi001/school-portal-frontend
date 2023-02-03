@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { useUserStore } from "@/stores/user";
+
+const { user } = useUserStore();
 </script>
 
 <template>
@@ -6,7 +9,7 @@
     class="p-4 rounded-md shadow-md bg-gradient-to-br from-purple-800 to-blue-600 text-white py-20 px-10"
   >
     <div>
-      <h1 class="text-4xl font-medium">Welcome Ibrahim</h1>
+      <h1 class="text-4xl font-medium">Welcome {{ user.first_name }}</h1>
       <p>Education is the passport to a better future.</p>
     </div>
   </div>

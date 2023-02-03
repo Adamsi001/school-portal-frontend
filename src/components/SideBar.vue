@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue-demi";
+import { useUserStore } from "@/stores/user";
+const { user } = useUserStore();
 
 const dashboard_links = ref([
   { title: "dashboard", href: "/" },
@@ -38,8 +40,8 @@ const dashboard_links = ref([
     <div class="flex gap-4 items-center">
       <div class="w-[40px] h-[40px] rounded-full bg-white/60"></div>
       <div>
-        <h2 class="text-lg text-ellipsis">Hi, Ibrahim</h2>
-        <p class="opacity-80 text-sm">student</p>
+        <h2 class="text-lg text-ellipsis">Hi, {{ user.first_name }}</h2>
+        <p class="opacity-80 text-sm">{{ user.type }}</p>
       </div>
     </div>
   </div>
