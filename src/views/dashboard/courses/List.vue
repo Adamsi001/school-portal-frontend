@@ -21,12 +21,15 @@
         </thead>
         <tbody class="divide-y">
           <tr v-for="course in courses" :key="course.code">
-            <router-link to="/courses/detail">
-              <td>{{ course.code }}</td>
-              <td>{{ course.title }}</td>
-              <td>{{ course.unit }}</td>
-              <td>core</td>
-            </router-link>
+            <td>{{ course.code }}</td>
+            <td>{{ course.title }}</td>
+            <td>{{ course.unit }}</td>
+            <td>core</td>
+            <td>
+              <router-link to="/courses/detail" class="link">
+                See Details
+              </router-link>
+            </td>
           </tr>
         </tbody>
       </table>
