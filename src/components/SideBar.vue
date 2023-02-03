@@ -59,12 +59,12 @@ const dashboard_links: { [key: string]: { title: string; href: string }[] } = {
         </li>
       </ul>
     </nav>
-    <div class="flex gap-4 items-center">
+    <router-link to="/profile" class="flex gap-4 items-center">
       <div class="w-[40px] h-[40px] rounded-full bg-white/60"></div>
       <div>
         <h2 class="text-lg text-ellipsis">Hi, {{ user.first_name }}</h2>
         <p class="opacity-80 text-sm">{{ user.type }}</p>
       </div>
-    </div>
+    </router-link>
   </div>
 </template>
