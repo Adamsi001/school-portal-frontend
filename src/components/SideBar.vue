@@ -18,6 +18,23 @@ const dashboard_links: { [key: string]: { title: string; href: string }[] } = {
     { title: "students", href: "/students" },
     { title: "announcements", href: "/announcements" },
   ],
+  admin: [
+    { title: "dashboard", href: "/" },
+    // users
+    { title: "users", href: "/users" },
+    { title: "students", href: "/students" },
+    { title: "lecturers", href: "/lecturers" },
+    { title: "level advisers", href: "/level-advisers" },
+    { title: "admins", href: "/admins" },
+    // school structure
+    { title: "sessions", href: "/sessions" },
+    { title: "levels", href: "/levels" },
+    { title: "faculties", href: "/faculties" },
+    { title: "departments", href: "/departments" },
+    // courses
+    { title: "courses", href: "/courses" },
+    // { title: "announcements", href: "/announcements" },
+  ],
 };
 </script>
 
@@ -61,7 +78,7 @@ const dashboard_links: { [key: string]: { title: string; href: string }[] } = {
       <div class="w-[40px] h-[40px] rounded-full bg-white/60"></div>
       <div>
         <h2 class="text-lg text-ellipsis">Hi, {{ user.first_name }}</h2>
-        <p class="opacity-80 text-sm">{{ user.type }}</p>
+        <p class="opacity-80 text-sm capitalize">{{ user.type }}</p>
       </div>
     </router-link>
   </div>
