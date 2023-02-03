@@ -31,6 +31,38 @@ const router = createRouter({
           component: () => import("../views/dashboard/courses/App.vue"),
           children: [
             {
+              path: "",
+              name: "courses list",
+              component: () => import("../views/dashboard/courses/List.vue"),
+              meta: {
+                title: "Courses",
+              },
+            },
+            {
+              path: "new",
+              name: "new courses",
+              component: () => import("../views/dashboard/courses/New.vue"),
+              meta: {
+                title: "New Course",
+              },
+            },
+            {
+              path: "detail",
+              name: "Course detail",
+              component: () => import("../views/dashboard/courses/Detail.vue"),
+              meta: {
+                title: "Course",
+              },
+            },
+            {
+              path: "detail/edit",
+              name: "Edot course",
+              component: () => import("../views/dashboard/courses/Edit.vue"),
+              meta: {
+                title: "Edit Course",
+              },
+            },
+            {
               path: "registrations",
               name: "course-registration",
               component: () =>
