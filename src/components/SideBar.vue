@@ -17,8 +17,6 @@ const dashboard_links: { [key: string]: { title: string; href: string }[] } = {
     { title: "dashboard", href: "/" },
     { title: "students", href: "/students" },
     { title: "announcements", href: "/announcements" },
-    // { title: "course registration", href: "/courses/registrations" },
-    // { title: "results", href: "/results" },
   ],
 };
 </script>
