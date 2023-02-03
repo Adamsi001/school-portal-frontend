@@ -26,6 +26,51 @@ const router = createRouter({
           component: () => import("../views/dashboard/DashboardView.vue"),
         },
         {
+          path: "departments",
+          name: "departments",
+          component: () => import("../views/dashboard/departments/App.vue"),
+          meta: {
+            title: "Departments",
+          },
+          children: [
+            {
+              path: "",
+              name: "departments-list",
+              component: () =>
+                import("../views/dashboard/departments/List.vue"),
+              meta: {
+                title: "Departments",
+              },
+            },
+            {
+              path: "new",
+              name: "new department",
+              component: () => import("../views/dashboard/departments/New.vue"),
+              meta: {
+                title: "New Department",
+              },
+            },
+            {
+              path: "detail",
+              name: "department detail",
+              component: () =>
+                import("../views/dashboard/departments/Detail.vue"),
+              meta: {
+                title: "Department Detail",
+              },
+            },
+            {
+              path: "detail/edit",
+              name: "edit department",
+              component: () =>
+                import("../views/dashboard/departments/Edit.vue"),
+              meta: {
+                title: "Edit Department",
+              },
+            },
+          ],
+        },
+        {
           path: "courses",
           name: "courses",
           component: () => import("../views/dashboard/courses/App.vue"),
