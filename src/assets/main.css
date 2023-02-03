@@ -21,8 +21,8 @@
   .card-subtitle {
     @apply opacity-70;
   }
-  input[type="password"],
-  input[type="text"] {
+  input,
+  textarea {
     @apply p-4 bg-slate-900/10 rounded-xl;
   }
   .link {

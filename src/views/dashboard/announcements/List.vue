@@ -1,7 +1,12 @@
 <template>
-  <div>
-    <h1 class="text-4xl font-medium">Announcements</h1>
-    <p>See what announcements are available for you.</p>
+  <div class="flex justify-between items-center">
+    <div>
+      <h1 class="text-4xl font-medium">Announcements</h1>
+      <p>See what announcements are available for you.</p>
+    </div>
+    <RouterLink to="announcements/new" class="btn-primary">
+      Make new announcement
+    </RouterLink>
   </div>
   <template v-if="announcements.length">
     <div class="grid grid-cols-3 gap-8">

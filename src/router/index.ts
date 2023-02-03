@@ -78,6 +78,15 @@ const router = createRouter({
               },
             },
             {
+              path: "new",
+              name: "announcement-new",
+              component: () =>
+                import("../views/dashboard/announcements/New.vue"),
+              meta: {
+                title: "New Announcement",
+              },
+            },
+            {
               path: "detail",
               name: "announcement-detail",
               component: () =>
