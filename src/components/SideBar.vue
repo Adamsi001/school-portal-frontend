@@ -1,14 +1,21 @@
 <script setup lang="ts">
-import { ref } from "vue-demi";
 import { useUserStore } from "@/stores/user";
 const { user } = useUserStore();
 
-const dashboard_links = ref([
-  { title: "dashboard", href: "/" },
-  { title: "announcements", href: "/announcements" },
-  { title: "course registration", href: "/courses/registrations" },
-  { title: "results", href: "/results" },
-]);
+const dashboard_links: { [key: string]: { title: string; href: string }[] } = {
+  student: [
+    { title: "dashboard", href: "/" },
+    { title: "announcements", href: "/announcements" },
+    { title: "course registration", href: "/courses/registrations" },
+    { title: "results", href: "/results" },
+  ],
+  "level adviser": [
+    { title: "dashboard", href: "/" },
+    { title: "announcements", href: "/announcements" },
+    { title: "course registration", href: "/courses/registrations" },
+    { title: "results", href: "/results" },
+  ],
+};
 </script>
 
 <template>
@@ -18,7 +25,11 @@ const dashboard_links = ref([
     <h1 class="text-xl m-4 font-medium">Portal</h1>
     <nav class="flex-1 py-10">
       <ul class="flex flex-col gap-1">
-        <li v-for="link in dashboard_links" :key="link.href" class="capitalize">
+        <li
+          v-for="link in dashboard_links[user.type]"
+          :key="link.href"
+          class="capitalize"
+        >
           <router-link
             :to="link.href"
             class="group p-4 rounded-md hover:bg-slate-800 transition-default flex justify-between"
