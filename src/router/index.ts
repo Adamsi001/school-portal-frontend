@@ -95,7 +95,7 @@ const router = createRouter({
               },
             },
             {
-              path: "detail",
+              path: ":id",
               name: "faculty detail",
               component: () =>
                 import("../views/dashboard/faculties/Detail.vue"),
@@ -104,7 +104,7 @@ const router = createRouter({
               },
             },
             {
-              path: "detail/edit",
+              path: ":id/edit",
               name: "edit faculty",
               component: () => import("../views/dashboard/faculties/Edit.vue"),
               meta: {

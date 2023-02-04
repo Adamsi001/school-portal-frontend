@@ -9,7 +9,13 @@
     </RouterLink>
   </div>
   <div class="card">
-    <div>
+    <div v-if="fetching">
+      <h2 class="text-2xl font-semibold opacity-30">loading...</h2>
+    </div>
+    <div v-else-if="faculties.length < 1">
+      <h2 class="text-2xl font-semibold opacity-30">No sessions yet.</h2>
+    </div>
+    <div v-else>
       <table class="w-full text-left">
         <thead>
           <tr>
@@ -24,7 +30,7 @@
             <td class="uppercase">{{ faculty.abbrevation }}</td>
             <td class="capitalize">{{ faculty.title }}</td>
             <td>
-              <router-link to="/faculties/detail" class="link">
+              <router-link :to="`/faculties/${faculty.id}`" class="link">
                 See Details
               </router-link>
             </td>
@@ -36,20 +42,17 @@
 </template>
 
 <script setup lang="ts">
-const faculties = [
-  {
-    abbrevation: "SICT",
-    title: "school of information and comminication technology",
-  },
-  {
-    title: "School of agriculture and agricultural technology",
-    abbrevation: "SAAT",
-  },
-  {
-    title: "School of engineering and engineering technology",
-    abbrevation: "SEET",
-  },
-];
+import { onBeforeMount, ref } from "vue-demi";
+import { useFacultiesStore } from "@/stores/faculties";
+const { getFaculties } = useFacultiesStore();
+
+const fetching = ref(true);
+const faculties = ref([]);
+
+onBeforeMount(async () => {
+  await getFaculties().then((data) => (faculties.value = data));
+  fetching.value = false;
+});
 </script>
 
 <style scoped>
