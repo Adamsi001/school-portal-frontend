@@ -13,7 +13,7 @@
       <h2 class="text-2xl font-semibold opacity-30">loading...</h2>
     </div>
     <div v-else-if="faculties.length < 1">
-      <h2 class="text-2xl font-semibold opacity-30">No sessions yet.</h2>
+      <h2 class="text-2xl font-semibold opacity-30">No faculty yet.</h2>
     </div>
     <div v-else>
       <table class="w-full text-left">
