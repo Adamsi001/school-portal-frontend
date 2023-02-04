@@ -13,10 +13,9 @@ export const useFacultiesStore = defineStore("faculties", () => {
   };
   const getFaculty = async (id) => {
     let faculty = faculties.value[id];
-    if (faculty) {
-      return faculty;
+    if (!faculty) {
+      faculty = await useFetch(`faculties/${id}`);
     }
-    faculty = await useFetch(`faculties/${id}`);
     return faculty;
   };
   const getFaculties = async () => {
@@ -51,5 +50,73 @@ export const useFacultiesStore = defineStore("faculties", () => {
     });
   };
 
-  return { faculties, addFaculty, editFaculty, getFaculty, getFaculties };
+  return {
+    faculties,
+    fetchFaculties,
+    addFaculty,
+    editFaculty,
+    getFaculty,
+    getFaculties,
+  };
+});
+
+export const useDepartmentsStore = defineStore("departments", () => {
+  const departments = ref({});
+  const isDepartmentsEmpty = computed(() => departments.value == {});
+
+  const fetchDepartments = async () => {
+    await useFetch("departments").then((response) => {
+      response.map(
+        (department) => (departments.value[department.id] = department)
+      );
+    });
+  };
+  const getDepartment = async (id) => {
+    let department = departments.value[id];
+    if (!department) {
+      department = await useFetch(`departments/${id}`);
+    }
+    return department;
+  };
+  const getDepartments = async () => {
+    if (isDepartmentsEmpty) {
+      await fetchDepartments();
+    }
+    return Object.values(departments.value);
+  };
+  const addDepartment = async (form) => {
+    return await useFetch(`departments/`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(form),
+    }).then((data) => {
+      departments.value[data.id] = data;
+    });
+  };
+  const editDepartment = async (form) => {
+    return await useFetch(`departments/${form.id}/`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        title: form.title,
+        abbrevation: form.abbrevation,
+        short_code: form.short_code,
+        faculty: form.faculty,
+      }),
+    }).then(async (data) => {
+      departments.value[form.id] = data;
+    });
+  };
+
+  return {
+    departments,
+    addDepartment,
+    editDepartment,
+    getDepartment,
+    getDepartments,
+  };
 });

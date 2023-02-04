@@ -51,7 +51,7 @@ const router = createRouter({
               },
             },
             {
-              path: "detail",
+              path: ":id",
               name: "department detail",
               component: () =>
                 import("../views/dashboard/departments/Detail.vue"),
@@ -60,7 +60,7 @@ const router = createRouter({
               },
             },
             {
-              path: "detail/edit",
+              path: ":id/edit",
               name: "edit department",
               component: () =>
                 import("../views/dashboard/departments/Edit.vue"),

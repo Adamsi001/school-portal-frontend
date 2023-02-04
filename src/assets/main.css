@@ -22,6 +22,7 @@
     @apply opacity-70;
   }
   .field,
+  .input,
   input,
   textarea {
     @apply p-4 bg-slate-900/10 rounded-xl;
