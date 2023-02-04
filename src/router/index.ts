@@ -71,6 +71,49 @@ const router = createRouter({
           ],
         },
         {
+          path: "faculties",
+          name: "faculties",
+          component: () => import("../views/dashboard/faculties/App.vue"),
+          meta: {
+            title: "Faculties",
+          },
+          children: [
+            {
+              path: "",
+              name: "faculties-list",
+              component: () => import("../views/dashboard/faculties/List.vue"),
+              meta: {
+                title: "Faculties",
+              },
+            },
+            {
+              path: "new",
+              name: "new faculty",
+              component: () => import("../views/dashboard/faculties/New.vue"),
+              meta: {
+                title: "New Department",
+              },
+            },
+            {
+              path: "detail",
+              name: "faculty detail",
+              component: () =>
+                import("../views/dashboard/faculties/Detail.vue"),
+              meta: {
+                title: "Department Detail",
+              },
+            },
+            {
+              path: "detail/edit",
+              name: "edit faculty",
+              component: () => import("../views/dashboard/faculties/Edit.vue"),
+              meta: {
+                title: "Edit Department",
+              },
+            },
+          ],
+        },
+        {
           path: "courses",
           name: "courses",
           component: () => import("../views/dashboard/courses/App.vue"),
