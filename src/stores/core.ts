@@ -52,3 +52,52 @@ export const useSessionsStore = defineStore("sessions", () => {
 
   return { sessions, addSession, editSession, getSession, getSessions };
 });
+
+export const useLevelsStore = defineStore("levels", () => {
+  const levels = ref({});
+  const islevelsEmpty = computed(() => levels.value == {});
+
+  const fetchLevels = async () => {
+    await useFetch("levels").then((response_levels) => {
+      response_levels.map((level) => (levels.value[level.id] = level));
+    });
+  };
+  const getLevel = async (id) => {
+    let level = levels.value[id];
+    if (level) {
+      return level;
+    }
+    level = await useFetch(`levels/${id}`);
+    return level;
+  };
+  const getLevels = async () => {
+    if (islevelsEmpty) {
+      await fetchLevels();
+    }
+    return Object.values(levels.value);
+  };
+  const addLevel = async (form) => {
+    return await useFetch(`levels/`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(form),
+    }).then((data) => {
+      levels.value[data.id] = data;
+    });
+  };
+  const editLevel = async (form) => {
+    return await useFetch(`levels/${form.id}/`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ title: form.title }),
+    }).then(async (data) => {
+      levels.value[form.id] = data;
+    });
+  };
+
+  return { levels, addLevel, editLevel, getLevel, getLevels };
+});

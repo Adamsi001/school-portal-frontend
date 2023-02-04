@@ -7,7 +7,13 @@
     <RouterLink to="levels/new" class="btn-primary"> Add New Level </RouterLink>
   </div>
   <div class="card">
-    <div>
+    <div v-if="fetching">
+      <h2 class="text-2xl font-semibold opacity-30">loading...</h2>
+    </div>
+    <div v-else-if="levels.length < 1">
+      <h2 class="text-2xl font-semibold opacity-30">No levels yet.</h2>
+    </div>
+    <div v-else>
       <table class="w-full text-left">
         <thead>
           <tr>
@@ -20,7 +26,7 @@
             <td>{{ index + 1 }}</td>
             <td class="capitalize">{{ level.title }}</td>
             <td>
-              <router-link to="/levels/detail/edit" class="link">
+              <router-link :to="`/levels/${level.id}/edit`" class="link">
                 Edit level
               </router-link>
             </td>
@@ -32,19 +38,18 @@
 </template>
 
 <script setup lang="ts">
-const levels = [
-  {
-    title: 100,
-  },
-  {
-    title: 200,
-  },
-  {
-    title: 300,
-  },
-];
-</script>
+import { onBeforeMount, ref } from "vue-demi";
+import { useLevelsStore } from "@/stores/core";
+const { getLevels } = useLevelsStore();
 
+const fetching = ref(true);
+const levels = ref([]);
+
+onBeforeMount(async () => {
+  await getLevels().then((data) => (levels.value = data));
+  fetching.value = false;
+});
+</script>
 <style scoped>
 td,
 th {

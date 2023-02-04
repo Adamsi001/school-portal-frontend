@@ -172,7 +172,7 @@ const router = createRouter({
               },
             },
             {
-              path: "detail/edit",
+              path: ":id/edit",
               name: "edit level",
               component: () => import("../views/dashboard/levels/Edit.vue"),
               meta: {
