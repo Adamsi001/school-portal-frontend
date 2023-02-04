@@ -147,6 +147,40 @@ const router = createRouter({
             },
           ],
         },
+        {
+          path: "levels",
+          name: "levels",
+          component: () => import("../views/dashboard/levels/App.vue"),
+          meta: {
+            title: "Levels",
+          },
+          children: [
+            {
+              path: "",
+              name: "levels-list",
+              component: () => import("../views/dashboard/levels/List.vue"),
+              meta: {
+                title: "Levels",
+              },
+            },
+            {
+              path: "new",
+              name: "new level",
+              component: () => import("../views/dashboard/levels/New.vue"),
+              meta: {
+                title: "New Level",
+              },
+            },
+            {
+              path: "detail/edit",
+              name: "edit level",
+              component: () => import("../views/dashboard/levels/Edit.vue"),
+              meta: {
+                title: "Edit Level",
+              },
+            },
+          ],
+        },
 
         {
           path: "courses",
