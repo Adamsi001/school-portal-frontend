@@ -22,13 +22,13 @@ const profile = {
         <div class="grid grid-cols-3 gap-4">
           <div>
             <p class="font-semibold">First Name:</p>
-            <div class="flex gap-2 p-2 rounded-md bg-slate-900/10">
+            <div class="field">
               <p class="opacity-60">{{ profile.first_name }}</p>
             </div>
           </div>
           <div>
             <p class="font-semibold">Middle Name:</p>
-            <div class="flex gap-2 p-2 rounded-md bg-slate-900/10">
+            <div class="field">
               <p class="opacity-60">
                 {{ profile.middle_name || "-" }}
               </p>
@@ -36,7 +36,7 @@ const profile = {
           </div>
           <div>
             <p class="font-semibold">Last Name:</p>
-            <div class="flex gap-2 p-2 rounded-md bg-slate-900/10">
+            <div class="field">
               <p class="opacity-60">{{ profile.last_name }}</p>
             </div>
           </div>
@@ -44,13 +44,13 @@ const profile = {
         <div class="grid grid-cols-2 gap-4">
           <div>
             <p class="font-semibold">Gender:</p>
-            <div class="flex gap-2 p-2 rounded-md bg-slate-900/10">
+            <div class="field">
               <p class="opacity-60">{{ profile.gender }}</p>
             </div>
           </div>
           <div>
             <p class="font-semibold">User ID:</p>
-            <div class="flex gap-2 p-2 rounded-md bg-slate-900/10">
+            <div class="field">
               <p class="opacity-60">{{ profile.user_id }}</p>
             </div>
           </div>
@@ -58,19 +58,19 @@ const profile = {
         <div class="grid grid-cols-3 gap-4">
           <div>
             <p class="font-semibold">Faculty:</p>
-            <div class="flex gap-2 p-2 rounded-md bg-slate-900/10">
+            <div class="field">
               <p class="opacity-60">{{ profile.faculty }}</p>
             </div>
           </div>
           <div>
             <p class="font-semibold">Department:</p>
-            <div class="flex gap-2 p-2 rounded-md bg-slate-900/10">
+            <div class="field">
               <p class="opacity-60">{{ profile.department }}</p>
             </div>
           </div>
           <div>
             <p class="font-semibold">Level:</p>
-            <div class="flex gap-2 p-2 rounded-md bg-slate-900/10">
+            <div class="field">
               <p class="opacity-60">{{ profile.level }}</p>
             </div>
           </div>
@@ -78,13 +78,13 @@ const profile = {
         <div class="grid grid-cols-2 gap-4">
           <div>
             <p class="font-semibold">Email:</p>
-            <div class="flex gap-2 p-2 rounded-md bg-slate-900/10">
+            <div class="field">
               <p class="opacity-60">{{ profile.email }}</p>
             </div>
           </div>
           <div>
             <p class="font-semibold">Matric Number:</p>
-            <div class="flex gap-2 p-2 rounded-md bg-slate-900/10">
+            <div class="field">
               <p class="opacity-60">{{ profile.matric_number }}</p>
             </div>
           </div>

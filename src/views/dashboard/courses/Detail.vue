@@ -9,36 +9,36 @@
     </div>
     <RouterLink to="detail/edit" class="btn-primary"> Edit Course </RouterLink>
   </div>
-  <div class="card">
+  <div class="card space-y-4">
     <div>
       <p class="font-semibold">Title:</p>
-      <div class="flex gap-2 p-2 rounded-md bg-slate-900/10">
+      <div class="field">
         <p class="opacity-60">{{ course.title }}</p>
       </div>
     </div>
     <div class="grid grid-cols-3 gap-4">
       <div>
         <p class="font-semibold">Code:</p>
-        <div class="flex gap-2 p-2 rounded-md bg-slate-900/10">
+        <div class="field">
           <p class="opacity-60">{{ course.code }}</p>
         </div>
       </div>
       <div>
         <p class="font-semibold">Unit:</p>
-        <div class="flex gap-2 p-2 rounded-md bg-slate-900/10">
+        <div class="field">
           <p class="opacity-60">{{ course.unit }}</p>
         </div>
       </div>
       <div>
         <p class="font-semibold">Semester:</p>
-        <div class="flex gap-2 p-2 rounded-md bg-slate-900/10">
+        <div class="field">
           <p class="opacity-60">{{ course.semester }}</p>
         </div>
       </div>
     </div>
     <div>
       <p class="font-semibold">Description:</p>
-      <div class="flex gap-2 p-2 rounded-md bg-slate-900/10">
+      <div class="field">
         <p class="opacity-60">{{ course.description }}</p>
       </div>
     </div>

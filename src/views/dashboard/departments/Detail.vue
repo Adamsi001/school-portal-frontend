@@ -13,29 +13,29 @@
       Edit Department
     </RouterLink>
   </div>
-  <div class="card">
+  <div class="card space-y-4">
     <div>
       <p class="font-semibold">Title:</p>
-      <div class="flex gap-2 p-2 rounded-md bg-slate-900/10">
+      <div class="field">
         <p class="opacity-60">{{ department.title }}</p>
       </div>
     </div>
     <div class="grid grid-cols-3 gap-4">
       <div>
         <p class="font-semibold">Abbrevation:</p>
-        <div class="flex gap-2 p-2 rounded-md bg-slate-900/10">
+        <div class="field">
           <p class="opacity-60">{{ department.abbrevation }}</p>
         </div>
       </div>
       <div>
         <p class="font-semibold">Short Code:</p>
-        <div class="flex gap-2 p-2 rounded-md bg-slate-900/10">
+        <div class="field">
           <p class="opacity-60">{{ department.short_code }}</p>
         </div>
       </div>
       <div>
         <p class="font-semibold">Faculty:</p>
-        <div class="flex gap-2 p-2 rounded-md bg-slate-900/10">
+        <div class="field">
           <p class="opacity-60">{{ department.faculty }}</p>
         </div>
       </div>
