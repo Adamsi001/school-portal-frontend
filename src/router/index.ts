@@ -113,6 +113,40 @@ const router = createRouter({
             },
           ],
         },
+        {
+          path: "sessions",
+          name: "sessions",
+          component: () => import("../views/dashboard/sessions/App.vue"),
+          meta: {
+            title: "Sessions",
+          },
+          children: [
+            {
+              path: "",
+              name: "sessions-list",
+              component: () => import("../views/dashboard/sessions/List.vue"),
+              meta: {
+                title: "Sessions",
+              },
+            },
+            {
+              path: "new",
+              name: "new session",
+              component: () => import("../views/dashboard/sessions/New.vue"),
+              meta: {
+                title: "New Session",
+              },
+            },
+            {
+              path: "detail/edit",
+              name: "edit session",
+              component: () => import("../views/dashboard/sessions/Edit.vue"),
+              meta: {
+                title: "Edit Session",
+              },
+            },
+          ],
+        },
 
         {
           path: "courses",
