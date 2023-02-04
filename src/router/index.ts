@@ -138,7 +138,7 @@ const router = createRouter({
               },
             },
             {
-              path: "detail/edit",
+              path: ":id/edit",
               name: "edit session",
               component: () => import("../views/dashboard/sessions/Edit.vue"),
               meta: {

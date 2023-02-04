@@ -9,7 +9,13 @@
     </RouterLink>
   </div>
   <div class="card">
-    <div>
+    <div v-if="fetching">
+      <h2 class="text-2xl font-semibold opacity-30">loading...</h2>
+    </div>
+    <div v-else-if="sessions.length < 1">
+      <h2 class="text-2xl font-semibold opacity-30">No sessions yet.</h2>
+    </div>
+    <div v-else>
       <table class="w-full text-left">
         <thead>
           <tr>
@@ -18,11 +24,11 @@
           </tr>
         </thead>
         <tbody class="divide-y">
-          <tr v-for="(session, index) in sessions" :key="session.title">
+          <tr v-for="(session, index) in sessions" :key="session.id">
             <td>{{ index + 1 }}</td>
             <td class="capitalize">{{ session.title }}</td>
             <td>
-              <router-link to="/sessions/detail/edit" class="link">
+              <router-link :to="`/sessions/${session.id}/edit`" class="link">
                 Edit session
               </router-link>
             </td>
@@ -34,17 +40,17 @@
 </template>
 
 <script setup lang="ts">
-const sessions = [
-  {
-    title: "2015/2016",
-  },
-  {
-    title: "2016/2017",
-  },
-  {
-    title: "2017/2018",
-  },
-];
+import { onBeforeMount, ref } from "vue-demi";
+import { useSessionsStore } from "@/stores/core";
+const { getSessions } = useSessionsStore();
+
+const fetching = ref(true);
+const sessions = ref([]);
+
+onBeforeMount(async () => {
+  await getSessions().then((data) => (sessions.value = data));
+  fetching.value = false;
+});
 </script>
 
 <style scoped>
