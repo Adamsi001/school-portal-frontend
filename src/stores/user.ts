@@ -3,7 +3,7 @@ import { defineStore } from "pinia";
 
 export const useUserStore = defineStore("user", () => {
   const user = ref({
-    type: "admin",
+    type: "level adviser",
     first_name: "Ibrahim",
     last_name: "Abdulhameed",
   });

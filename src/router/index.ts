@@ -276,7 +276,7 @@ const router = createRouter({
               },
             },
             {
-              path: "detail",
+              path: ":id",
               name: "announcement-detail",
               component: () =>
                 import("../views/dashboard/announcements/Detail.vue"),
