@@ -114,6 +114,7 @@ export const useDepartmentsStore = defineStore("departments", () => {
 
   return {
     departments,
+    fetchDepartments,
     addDepartment,
     editDepartment,
     getDepartment,

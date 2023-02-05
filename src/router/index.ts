@@ -300,6 +300,49 @@ const router = createRouter({
           },
         },
         {
+          path: "lecturers",
+          name: "lecturers",
+          component: () => import("../views/dashboard/lecturers/App.vue"),
+          meta: {
+            title: "Lecturers",
+          },
+          children: [
+            {
+              path: "",
+              name: "lecturers-list",
+              component: () => import("../views/dashboard/lecturers/List.vue"),
+              meta: {
+                title: "Lecturers",
+              },
+            },
+            {
+              path: "new",
+              name: "new lecturer",
+              component: () => import("../views/dashboard/lecturers/New.vue"),
+              meta: {
+                title: "New Lecturer",
+              },
+            },
+            {
+              path: ":id",
+              name: "lecturer detail",
+              component: () =>
+                import("../views/dashboard/lecturers/Detail.vue"),
+              meta: {
+                title: "Lecturer Detail",
+              },
+            },
+            {
+              path: ":id/edit",
+              name: "edit lecturer",
+              component: () => import("../views/dashboard/lecturers/Edit.vue"),
+              meta: {
+                title: "Edit Lecturer",
+              },
+            },
+          ],
+        },
+        {
           path: "students",
           name: "Students",
           component: () => import("../views/dashboard/students/List.vue"),
