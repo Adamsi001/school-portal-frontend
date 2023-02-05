@@ -345,10 +345,44 @@ const router = createRouter({
         {
           path: "students",
           name: "Students",
-          component: () => import("../views/dashboard/students/List.vue"),
+          component: () => import("../views/dashboard/students/App.vue"),
           meta: {
             title: "Students",
           },
+          children: [
+            {
+              path: "",
+              name: "students-list",
+              component: () => import("../views/dashboard/students/List.vue"),
+              meta: {
+                title: "Students",
+              },
+            },
+            {
+              path: "new",
+              name: "new student",
+              component: () => import("../views/dashboard/students/New.vue"),
+              meta: {
+                title: "New Student",
+              },
+            },
+            {
+              path: ":id",
+              name: "student detail",
+              component: () => import("../views/dashboard/students/Detail.vue"),
+              meta: {
+                title: "Student Detail",
+              },
+            },
+            {
+              path: ":id/edit",
+              name: "edit student",
+              component: () => import("../views/dashboard/students/Edit.vue"),
+              meta: {
+                title: "Edit Student",
+              },
+            },
+          ],
         },
       ],
     },
