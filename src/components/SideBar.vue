@@ -4,17 +4,22 @@ import { computed } from "vue-demi";
 import { useRoute } from "vue-router";
 import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/vue";
 
+interface Dashboard_link {
+  title: string;
+  href?: string;
+  children?: { title: string; href: string }[];
+}
+
 const { user } = useUserStore();
 
 const route = useRoute();
 
 const dashboard_links = computed(() => {
-  let links = [];
+  let links: Dashboard_link[] = [{ title: "dashboard", href: "/" }];
 
   switch (user.user_type) {
     case "student":
       links.push(
-        { title: "dashboard", href: "/" },
         { title: "announcements", href: "/announcements" },
         { title: "course registration", href: "/courses/registrations" },
         { title: "results", href: "/results" }
@@ -22,7 +27,6 @@ const dashboard_links = computed(() => {
       break;
     case "admin":
       links.push(
-        { title: "dashboard", href: "/" },
         // users
         {
           title: "Users",
@@ -47,7 +51,6 @@ const dashboard_links = computed(() => {
     case "staff":
       if (user.is_student_adviser) {
         links.push(
-          { title: "dashboard", href: "/" },
           { title: "students", href: "/users/students" },
           { title: "announcements", href: "/announcements" }
         );
