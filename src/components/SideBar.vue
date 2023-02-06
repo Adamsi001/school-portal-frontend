@@ -46,7 +46,7 @@ const dashboard_links: { [key: string]: { title: string; href: string }[] } = {
     <nav class="flex-1 py-10">
       <ul class="flex flex-col gap-1">
         <li
-          v-for="link in dashboard_links[user.type]"
+          v-for="link in dashboard_links[user.user_type]"
           :key="link.href"
           class="capitalize"
         >
@@ -78,7 +78,7 @@ const dashboard_links: { [key: string]: { title: string; href: string }[] } = {
       <div class="w-[40px] h-[40px] rounded-full bg-white/60"></div>
       <div>
         <h2 class="text-lg text-ellipsis">Hi, {{ user.first_name }}</h2>
-        <p class="opacity-80 text-sm capitalize">{{ user.type }}</p>
+        <p class="opacity-80 text-sm capitalize">{{ user.user_type }}</p>
       </div>
     </router-link>
   </div>
