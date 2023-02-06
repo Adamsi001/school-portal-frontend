@@ -507,7 +507,7 @@ router.beforeEach(async (to, from, next) => {
   if (!is_authenticated && to.name !== "login") {
     next({ name: "login", query: { redirect: to.path } });
     return;
-  } else {
+  } else if (is_authenticated && to.name == "login") {
     await logout();
   }
 
