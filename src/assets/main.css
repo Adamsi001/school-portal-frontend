@@ -12,6 +12,9 @@
   .btn-primary {
     @apply btn text-white bg-blue-500 hover:bg-blue-400;
   }
+  .btn-secondary {
+    @apply btn text-blue-500 border-blue-500 border hover:bg-blue-300/40 hover:border-blue-400 hover:text-blue-400;
+  }
   .card {
     @apply p-8 shadow-md rounded-md space-y-2 bg-white;
   }

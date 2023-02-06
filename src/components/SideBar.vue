@@ -6,71 +6,55 @@ import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/vue";
 
 const { user } = useUserStore();
 
-const user_profile_link = computed(() => {
-  let user_type;
-
-  switch (`${user.user_type}`.toLowerCase()) {
-    case "admin":
-      user_type = "users";
-      break;
-    case "lecturer":
-      user_type = "users";
-      break;
-    case "level adviser":
-      user_type = "lecturers";
-      break;
-    case "students":
-      user_type = "students";
-      break;
-    default:
-      user_type = "users";
-  }
-  return `/users/${user_type}/${user.id}`;
-});
-
 const route = useRoute();
 
-const dashboard_links: {
-  [key: string]: {
-    title: string;
-    href?: string;
-    children?: { title: string; href: string }[];
-  }[];
-} = {
-  student: [
-    { title: "dashboard", href: "/" },
-    { title: "announcements", href: "/announcements" },
-    { title: "course registration", href: "/courses/registrations" },
-    { title: "results", href: "/results" },
-  ],
-  "level adviser": [
-    { title: "dashboard", href: "/" },
-    { title: "students", href: "/users/students" },
-    { title: "announcements", href: "/announcements" },
-  ],
-  admin: [
-    { title: "dashboard", href: "/" },
-    // users
-    {
-      title: "Users",
-      href: "/users",
-      children: [
-        { title: "students", href: "/students" },
-        { title: "lecturers", href: "/lecturers" },
-        { title: "level advisers", href: "/level-advisers" },
-        { title: "admins", href: "/admins" },
-      ],
-    },
-    // school structure
-    { title: "sessions", href: "/sessions" },
-    { title: "levels", href: "/levels" },
-    { title: "faculties", href: "/faculties" },
-    { title: "departments", href: "/departments" },
-    // courses
-    { title: "courses", href: "/courses" },
-    // { title: "announcements", href: "/announcements" },
-  ],
-};
+const dashboard_links = computed(() => {
+  let links = [];
+
+  switch (user.user_type) {
+    case "student":
+      links.push(
+        { title: "dashboard", href: "/" },
+        { title: "announcements", href: "/announcements" },
+        { title: "course registration", href: "/courses/registrations" },
+        { title: "results", href: "/results" }
+      );
+      break;
+    case "admin":
+      links.push(
+        { title: "dashboard", href: "/" },
+        // users
+        {
+          title: "Users",
+          href: "/users",
+          children: [
+            { title: "students", href: "/students" },
+            { title: "lecturers", href: "/lecturers" },
+            { title: "level advisers", href: "/level-advisers" },
+            { title: "admins", href: "/admins" },
+          ],
+        },
+        // school structure
+        { title: "sessions", href: "/sessions" },
+        { title: "levels", href: "/levels" },
+        { title: "faculties", href: "/faculties" },
+        { title: "departments", href: "/departments" },
+        // courses
+        { title: "courses", href: "/courses" }
+        // { title: "announcements", href: "/announcements" },
+      );
+      break;
+    case "staff":
+      if (user.is_student_adviser) {
+        links.push(
+          { title: "dashboard", href: "/" },
+          { title: "students", href: "/users/students" },
+          { title: "announcements", href: "/announcements" }
+        );
+      }
+  }
+  return links;
+});
 </script>
 
 <template>
@@ -80,11 +64,7 @@ const dashboard_links: {
     <h1 class="text-xl m-4 font-medium">Portal</h1>
     <nav class="flex-1 py-10">
       <ul class="flex flex-col gap-1 capitalize">
-        <li
-          v-for="link in dashboard_links[user.user_type]"
-          :key="link.href"
-          class="capitalize"
-        >
+        <li v-for="link in dashboard_links" :key="link.href" class="capitalize">
           <Menu
             as="div"
             class="relative text-left p-4 rounded-md transition-default"
@@ -167,11 +147,19 @@ const dashboard_links: {
         </li>
       </ul>
     </nav>
-    <router-link to="profile" class="flex gap-4 items-center">
+    <router-link to="/profile" class="flex gap-4 items-center">
       <div class="w-[40px] h-[40px] rounded-full bg-white/60"></div>
       <div>
         <h2 class="text-lg text-ellipsis">Hi, {{ user.first_name }}</h2>
-        <p class="opacity-80 text-sm capitalize">{{ user.user_type }}</p>
+        <p class="opacity-80 text-sm capitalize">
+          {{
+            user.is_student_adviser
+              ? "students adviser"
+              : user.is_lecturer
+              ? "lecturer"
+              : user.user_type
+          }}
+        </p>
       </div>
     </router-link>
   </div>
