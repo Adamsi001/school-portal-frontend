@@ -2,8 +2,31 @@
 import { useUserStore } from "@/stores/user";
 import { computed } from "vue-demi";
 import { useRoute } from "vue-router";
-const { user } = useUserStore();
 import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/vue";
+
+const { user } = useUserStore();
+
+const user_profile_link = computed(() => {
+  let user_type;
+
+  switch (`${user.user_type}`.toLowerCase()) {
+    case "admin":
+      user_type = "users";
+      break;
+    case "lecturer":
+      user_type = "users";
+      break;
+    case "level adviser":
+      user_type = "lecturers";
+      break;
+    case "students":
+      user_type = "students";
+      break;
+    default:
+      user_type = "users";
+  }
+  return `/users/${user_type}/${user.id}`;
+});
 
 const route = useRoute();
 
@@ -95,7 +118,7 @@ const dashboard_links: {
               leave-to-class="transform scale-95 opacity-0"
             >
               <MenuItems
-                class="absolute right-0 mr-2 translate-x-[100%] w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                class="absolute right-0 z-20 mr-2 translate-x-[100%] w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
               >
                 <div class="px-1 py-1 space-y-1">
                   <MenuItem
@@ -144,7 +167,7 @@ const dashboard_links: {
         </li>
       </ul>
     </nav>
-    <router-link to="/profile" class="flex gap-4 items-center">
+    <router-link to="profile" class="flex gap-4 items-center">
       <div class="w-[40px] h-[40px] rounded-full bg-white/60"></div>
       <div>
         <h2 class="text-lg text-ellipsis">Hi, {{ user.first_name }}</h2>

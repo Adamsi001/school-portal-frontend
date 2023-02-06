@@ -4,6 +4,69 @@ import { useFetch } from "@/utils/utils";
 
 const USERS_API_URL = "users";
 
+export const useAdminsStore = defineStore("admins", () => {
+  const admins = ref({});
+  const isAdminsEmpty = computed(() => admins.value == {});
+
+  const fetchAdmins = async () => {
+    await useFetch(`${USERS_API_URL}/admins`).then((response) => {
+      response.map((admin) => (admins.value[admin.id] = admin));
+    });
+  };
+  const getAdmin = async (id) => {
+    let admin = admins.value[id];
+    if (!admin) {
+      admin = await useFetch(`${USERS_API_URL}/admins/${id}`);
+    }
+    return admin;
+  };
+  const getAdmins = async () => {
+    if (isAdminsEmpty) {
+      await fetchAdmins();
+    }
+    return Object.values(admins.value);
+  };
+  const addAdmin = async (form) => {
+    return await useFetch(`${USERS_API_URL}/admins/`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(form),
+    }).then((data) => {
+      admins.value[data.id] = data;
+    });
+  };
+  const editAdmin = async (form) => {
+    return await useFetch(`${USERS_API_URL}/admins/${form.id}/`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        first_name: form.first_name,
+        middle_name: form.middle_name,
+        last_name: form.last_name,
+        email: form.email,
+        gender: form.gender,
+        faculty: form.faculty,
+        department: form.department,
+      }),
+    }).then(async (data) => {
+      admins.value[form.id] = data;
+    });
+  };
+
+  return {
+    admins,
+    fetchAdmins,
+    addAdmin,
+    editAdmin,
+    getAdmin,
+    getAdmins,
+  };
+});
+
 export const useLecturersStore = defineStore("lecturers", () => {
   const lecturers = ref({});
   const isLecturersEmpty = computed(() => lecturers.value == {});
@@ -127,5 +190,68 @@ export const useStudentsStore = defineStore("students", () => {
     editStudent,
     getStudent,
     getStudents,
+  };
+});
+
+export const useUsersStore = defineStore("users", () => {
+  const users = ref({});
+  const isUsersEmpty = computed(() => users.value == {});
+
+  const fetchUsers = async () => {
+    await useFetch(`${USERS_API_URL}/all`).then((response) => {
+      response.map((User) => (users.value[User.id] = User));
+    });
+  };
+  const getUser = async (id) => {
+    let User = users.value[id];
+    if (!User) {
+      User = await useFetch(`${USERS_API_URL}/all/${id}`);
+    }
+    return User;
+  };
+  const getUsers = async () => {
+    if (isUsersEmpty) {
+      await fetchUsers();
+    }
+    return Object.values(users.value);
+  };
+  const addUser = async (form) => {
+    return await useFetch(`${USERS_API_URL}/all/`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(form),
+    }).then((data) => {
+      users.value[data.id] = data;
+    });
+  };
+  const editUser = async (form) => {
+    return await useFetch(`${USERS_API_URL}/all/${form.id}/`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        first_name: form.first_name,
+        middle_name: form.middle_name,
+        last_name: form.last_name,
+        email: form.email,
+        gender: form.gender,
+        faculty: form.faculty,
+        department: form.department,
+      }),
+    }).then(async (data) => {
+      users.value[form.id] = data;
+    });
+  };
+
+  return {
+    users,
+    fetchUsers,
+    addUser,
+    editUser,
+    getUser,
+    getUsers,
   };
 });

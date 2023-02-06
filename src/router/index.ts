@@ -308,6 +308,53 @@ const router = createRouter({
           },
           children: [
             {
+              path: "admins",
+              name: "admins",
+              component: () =>
+                import("../views/dashboard/users/admins/App.vue"),
+              meta: {
+                title: "Admins",
+              },
+              children: [
+                {
+                  path: "",
+                  name: "admins-list",
+                  component: () =>
+                    import("../views/dashboard/users/admins/List.vue"),
+                  meta: {
+                    title: "Admins",
+                  },
+                },
+                {
+                  path: "new",
+                  name: "new admin",
+                  component: () =>
+                    import("../views/dashboard/users/admins/New.vue"),
+                  meta: {
+                    title: "New Admin",
+                  },
+                },
+                {
+                  path: ":id",
+                  name: "admin detail",
+                  component: () =>
+                    import("../views/dashboard/users/admins/Detail.vue"),
+                  meta: {
+                    title: "Admin Detail",
+                  },
+                },
+                {
+                  path: ":id/edit",
+                  name: "edit admin",
+                  component: () =>
+                    import("../views/dashboard/users/admins/Edit.vue"),
+                  meta: {
+                    title: "Edit Admin",
+                  },
+                },
+              ],
+            },
+            {
               path: "lecturers",
               name: "lecturers",
               component: () =>
@@ -397,6 +444,52 @@ const router = createRouter({
                     import("../views/dashboard/users/students/Edit.vue"),
                   meta: {
                     title: "Edit Student",
+                  },
+                },
+              ],
+            },
+            {
+              path: "users",
+              name: "users",
+              component: () => import("../views/dashboard/users/users/App.vue"),
+              meta: {
+                title: "Users",
+              },
+              children: [
+                {
+                  path: "",
+                  name: "users-list",
+                  component: () =>
+                    import("../views/dashboard/users/users/List.vue"),
+                  meta: {
+                    title: "Users",
+                  },
+                },
+                {
+                  path: "new",
+                  name: "new user",
+                  component: () =>
+                    import("../views/dashboard/users/users/New.vue"),
+                  meta: {
+                    title: "New User",
+                  },
+                },
+                {
+                  path: ":id",
+                  name: "user detail",
+                  component: () =>
+                    import("../views/dashboard/users/users/Detail.vue"),
+                  meta: {
+                    title: "User Detail",
+                  },
+                },
+                {
+                  path: ":id/edit",
+                  name: "edit user",
+                  component: () =>
+                    import("../views/dashboard/users/users/Edit.vue"),
+                  meta: {
+                    title: "Edit User",
                   },
                 },
               ],
