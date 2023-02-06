@@ -501,12 +501,14 @@ const router = createRouter({
   ],
 });
 
-router.beforeEach((to, from, next) => {
-  const { is_authenticated } = useUserStore();
+router.beforeEach(async (to, from, next) => {
+  const { is_authenticated, logout } = useUserStore();
 
   if (!is_authenticated && to.name !== "login") {
     next({ name: "login", query: { redirect: to.path } });
     return;
+  } else {
+    await logout();
   }
 
   if (to.meta.title) {

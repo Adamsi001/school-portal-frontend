@@ -12,6 +12,8 @@ export async function useFetch(link, options = {}) {
     options["headers"]["Authorization"] = "Token " + token;
   }
   const response = await fetch(`${API_URL}/${link}`, options);
-  const result = await response.json();
-  return result;
+  try {
+    const result = await response.json();
+    return result;
+  } catch {}
 }
