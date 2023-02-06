@@ -300,87 +300,106 @@ const router = createRouter({
           },
         },
         {
-          path: "lecturers",
-          name: "lecturers",
-          component: () => import("../views/dashboard/lecturers/App.vue"),
+          path: "users",
+          name: "users",
+          component: () => import("../views/dashboard/users/App.vue"),
           meta: {
-            title: "Lecturers",
+            title: "users",
           },
           children: [
             {
-              path: "",
-              name: "lecturers-list",
-              component: () => import("../views/dashboard/lecturers/List.vue"),
+              path: "lecturers",
+              name: "lecturers",
+              component: () =>
+                import("../views/dashboard/users/lecturers/App.vue"),
               meta: {
                 title: "Lecturers",
               },
+              children: [
+                {
+                  path: "",
+                  name: "lecturers-list",
+                  component: () =>
+                    import("../views/dashboard/users/lecturers/List.vue"),
+                  meta: {
+                    title: "Lecturers",
+                  },
+                },
+                {
+                  path: "new",
+                  name: "new lecturer",
+                  component: () =>
+                    import("../views/dashboard/users/lecturers/New.vue"),
+                  meta: {
+                    title: "New Lecturer",
+                  },
+                },
+                {
+                  path: ":id",
+                  name: "lecturer detail",
+                  component: () =>
+                    import("../views/dashboard/users/lecturers/Detail.vue"),
+                  meta: {
+                    title: "Lecturer Detail",
+                  },
+                },
+                {
+                  path: ":id/edit",
+                  name: "edit lecturer",
+                  component: () =>
+                    import("../views/dashboard/users/lecturers/Edit.vue"),
+                  meta: {
+                    title: "Edit Lecturer",
+                  },
+                },
+              ],
             },
             {
-              path: "new",
-              name: "new lecturer",
-              component: () => import("../views/dashboard/lecturers/New.vue"),
-              meta: {
-                title: "New Lecturer",
-              },
-            },
-            {
-              path: ":id",
-              name: "lecturer detail",
+              path: "students",
+              name: "Students",
               component: () =>
-                import("../views/dashboard/lecturers/Detail.vue"),
-              meta: {
-                title: "Lecturer Detail",
-              },
-            },
-            {
-              path: ":id/edit",
-              name: "edit lecturer",
-              component: () => import("../views/dashboard/lecturers/Edit.vue"),
-              meta: {
-                title: "Edit Lecturer",
-              },
-            },
-          ],
-        },
-        {
-          path: "students",
-          name: "Students",
-          component: () => import("../views/dashboard/students/App.vue"),
-          meta: {
-            title: "Students",
-          },
-          children: [
-            {
-              path: "",
-              name: "students-list",
-              component: () => import("../views/dashboard/students/List.vue"),
+                import("../views/dashboard/users/students/App.vue"),
               meta: {
                 title: "Students",
               },
-            },
-            {
-              path: "new",
-              name: "new student",
-              component: () => import("../views/dashboard/students/New.vue"),
-              meta: {
-                title: "New Student",
-              },
-            },
-            {
-              path: ":id",
-              name: "student detail",
-              component: () => import("../views/dashboard/students/Detail.vue"),
-              meta: {
-                title: "Student Detail",
-              },
-            },
-            {
-              path: ":id/edit",
-              name: "edit student",
-              component: () => import("../views/dashboard/students/Edit.vue"),
-              meta: {
-                title: "Edit Student",
-              },
+              children: [
+                {
+                  path: "",
+                  name: "students-list",
+                  component: () =>
+                    import("../views/dashboard/users/students/List.vue"),
+                  meta: {
+                    title: "Students",
+                  },
+                },
+                {
+                  path: "new",
+                  name: "new student",
+                  component: () =>
+                    import("../views/dashboard/users/students/New.vue"),
+                  meta: {
+                    title: "New Student",
+                  },
+                },
+                {
+                  path: ":id",
+                  name: "student detail",
+                  component: () =>
+                    import("../views/dashboard/users/students/Detail.vue"),
+                  meta: {
+                    title: "Student Detail",
+                  },
+                },
+                {
+                  path: ":id/edit",
+                  name: "edit student",
+                  component: () =>
+                    import("../views/dashboard/users/students/Edit.vue"),
+                  meta: {
+                    title: "Edit Student",
+                  },
+                },
+              ],
             },
           ],
         },
