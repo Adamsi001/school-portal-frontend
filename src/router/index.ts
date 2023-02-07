@@ -1,5 +1,5 @@
 import { useUserStore } from "@/stores/user";
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHistory, useRoute } from "vue-router";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -31,6 +31,7 @@ const router = createRouter({
           component: () => import("../views/dashboard/departments/App.vue"),
           meta: {
             title: "Departments",
+            access_levels: ["admin"],
           },
           children: [
             {
@@ -76,6 +77,7 @@ const router = createRouter({
           component: () => import("../views/dashboard/faculties/App.vue"),
           meta: {
             title: "Faculties",
+            access_levels: ["admin"],
           },
           children: [
             {
@@ -119,6 +121,7 @@ const router = createRouter({
           component: () => import("../views/dashboard/sessions/App.vue"),
           meta: {
             title: "Sessions",
+            access_levels: ["admin"],
           },
           children: [
             {
@@ -153,6 +156,7 @@ const router = createRouter({
           component: () => import("../views/dashboard/levels/App.vue"),
           meta: {
             title: "Levels",
+            access_levels: ["admin"],
           },
           children: [
             {
@@ -305,6 +309,7 @@ const router = createRouter({
           component: () => import("../views/dashboard/users/App.vue"),
           meta: {
             title: "users",
+            access_levels: ["admin"],
           },
           children: [
             {
@@ -408,6 +413,7 @@ const router = createRouter({
                 import("../views/dashboard/users/students/App.vue"),
               meta: {
                 title: "Students",
+                access_levels: ["admin", "student_adviser"],
               },
               children: [
                 {
@@ -496,13 +502,39 @@ const router = createRouter({
             },
           ],
         },
+        {
+          path: "",
+          name: "errors",
+          component: () => import("../views/errors/App.vue"),
+          meta: {
+            title: "Error",
+          },
+          children: [
+            {
+              path: "/:catchAll(.*)",
+              name: "404",
+              component: () => import("../views/errors/404.vue"),
+              meta: {
+                title: "Not Found",
+              },
+            },
+            {
+              path: "/401",
+              name: "401",
+              component: () => import("../views/errors/401.vue"),
+              meta: {
+                title: "Unauthorized",
+              },
+            },
+          ],
+        },
       ],
     },
   ],
 });
 
 router.beforeEach(async (to, from, next) => {
-  const { is_authenticated, logout } = useUserStore();
+  const { is_authenticated, user, logout } = useUserStore();
 
   if (!is_authenticated && to.name !== "login") {
     next({ name: "login", query: { redirect: to.path } });
@@ -511,6 +543,16 @@ router.beforeEach(async (to, from, next) => {
     await logout();
   }
 
+  if (to.matched.some((route) => route.meta.access_levels)) {
+    if (
+      (to.meta.access_levels.includes("admin") && user.user_type !== "admin") ||
+      (to.meta.access_levels.includes("student_adviser") &&
+        !user.is_student_adviser)
+    ) {
+      next({ name: "401" });
+      return;
+    }
+  }
   if (to.meta.title) {
     document.title = `${to.meta.title} | Portal`;
   } else {
