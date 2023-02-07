@@ -277,6 +277,7 @@ const router = createRouter({
                 import("../views/dashboard/announcements/New.vue"),
               meta: {
                 title: "New Announcement",
+                access_levels: ["admin", "student_adviser"],
               },
             },
             {
