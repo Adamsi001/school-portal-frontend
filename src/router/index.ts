@@ -205,6 +205,7 @@ const router = createRouter({
               component: () => import("../views/dashboard/courses/New.vue"),
               meta: {
                 title: "New Course",
+                access_levels: ["admin"],
               },
             },
             {
@@ -221,6 +222,7 @@ const router = createRouter({
               component: () => import("../views/dashboard/courses/Edit.vue"),
               meta: {
                 title: "Edit Course",
+                access_levels: ["admin"],
               },
             },
             {
@@ -321,6 +323,7 @@ const router = createRouter({
               meta: {
                 title: "Admins",
               },
+
               children: [
                 {
                   path: "",
@@ -545,11 +548,20 @@ router.beforeEach(async (to, from, next) => {
   }
 
   if (to.matched.some((route) => route.meta.access_levels)) {
+    let is_authorized = false;
+
+    if (to.meta.access_levels.includes("admin") && user.user_type !== "admin") {
+      is_authorized = true;
+    }
     if (
-      (to.meta.access_levels.includes("admin") && user.user_type !== "admin") ||
-      (to.meta.access_levels.includes("student_adviser") &&
-        !user.is_student_adviser)
+      to.meta.access_levels.includes("student_adviser") &&
+      !user.is_student_adviser
     ) {
+      is_authorized = true;
+    } else if (!to.meta.access_levels) {
+      is_authorized = true;
+    }
+    if (!is_authorized) {
       next({ name: "401" });
       return;
     }
