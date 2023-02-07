@@ -417,7 +417,6 @@ const router = createRouter({
                 import("../views/dashboard/users/students/App.vue"),
               meta: {
                 title: "Students",
-                access_levels: ["admin", "student_adviser"],
               },
               children: [
                 {
@@ -427,6 +426,7 @@ const router = createRouter({
                     import("../views/dashboard/users/students/List.vue"),
                   meta: {
                     title: "Students",
+                    access_levels: ["admin", "student_adviser"],
                   },
                 },
                 {
@@ -445,6 +445,7 @@ const router = createRouter({
                     import("../views/dashboard/users/students/Detail.vue"),
                   meta: {
                     title: "Student Detail",
+                    access_levels: ["admin", "student_adviser"],
                   },
                 },
                 {
