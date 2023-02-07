@@ -18,20 +18,31 @@
   <template v-else-if="announcements.length">
     <div class="grid grid-cols-3 gap-8">
       <template v-for="(announcement, index) in announcements" :key="index">
-        <div class="card">
-          <p class="text-sm opacity-60">
-            {{ new Date(announcement.date_created).toLocaleString() }}
-          </p>
-          <h2 class="text-2xl font-medium">
-            {{ announcement.body }}
-          </h2>
-          <p class="opacity-80">{{ announcement.body.slice(0, 100) }}...</p>
-          <p>
-            <RouterLink :to="`announcements/${announcement.id}`" class="link">
-              See details
-            </RouterLink>
-          </p>
-        </div>
+        <router-link
+          :to="`announcements/${announcement.id}`"
+          class="card space-y-8 hover:bg-opacity-60 transition-default"
+        >
+          <div class="space-y-4">
+            <h2 class="text-2xl font-medium">
+              {{ announcement.subject }}
+            </h2>
+            <p class="opacity-80">{{ announcement.body.slice(0, 100) }}...</p>
+          </div>
+          <div class="border-t pt-4 text-right">
+            <p class="opacity-80">
+              From:
+              <span class="font-medium">
+                {{ announcement.created_by.first_name }}
+                {{ announcement.created_by.middle_name || "" }}
+                {{ announcement.created_by.last_name }}
+              </span>
+            </p>
+
+            <p class="text-sm opacity-60 italic">
+              {{ new Date(announcement.date_created).toLocaleString() }}
+            </p>
+          </div>
+        </router-link>
       </template>
     </div>
   </template>
