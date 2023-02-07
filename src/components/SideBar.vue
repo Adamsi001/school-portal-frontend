@@ -120,8 +120,9 @@ const dashboard_links = computed(() => {
                             `${link.href}${child_link.href}`
                           ))
                           ? 'bg-slate-900 text-slate-100'
-                          : 'hover:bg-slate-80',
-                        active ? 'bg-slate-900 text-white' : 'text-gray-900',
+                          : active
+                          ? 'bg-slate-800 text-white'
+                          : 'text-gray-900',
                         'group flex w-full items-center rounded-md px-2 py-4 text-sm capitalize',
                       ]"
                     >
