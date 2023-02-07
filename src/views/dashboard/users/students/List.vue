@@ -4,7 +4,11 @@
       <h1 class="text-4xl font-medium">Students</h1>
       <p>Below is a list of all available students.</p>
     </div>
-    <RouterLink to="students/new" class="btn-primary">
+    <RouterLink
+      to="students/new"
+      class="btn-primary"
+      v-if="user.user_type == 'admin'"
+    >
       Add New Student
     </RouterLink>
   </div>
@@ -58,6 +62,9 @@
 import { onBeforeMount, ref } from "vue-demi";
 import { useDepartmentsStore, useFacultiesStore } from "@/stores/faculties";
 import { useStudentsStore } from "@/stores/users";
+import { useUserStore } from "@/stores/user";
+
+const { user } = useUserStore();
 
 const { getStudents } = useStudentsStore();
 const { fetchDepartments, departments } = useDepartmentsStore();

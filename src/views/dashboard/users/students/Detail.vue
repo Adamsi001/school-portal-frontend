@@ -7,7 +7,11 @@
       <h1 class="text-4xl font-medium">Student Detail</h1>
       <p>These are the information available for this student.</p>
     </div>
-    <RouterLink :to="`${route.params.id}/edit`" class="btn-primary">
+    <RouterLink
+      :to="`${route.params.id}/edit`"
+      class="btn-primary"
+      v-if="user.user_type == 'admin'"
+    >
       Edit Student
     </RouterLink>
   </div>
@@ -85,6 +89,9 @@ import { onBeforeMount, ref } from "vue";
 import { useRoute } from "vue-router";
 import { useFacultiesStore, useDepartmentsStore } from "@/stores/faculties";
 import { useStudentsStore, useLecturersStore } from "@/stores/users";
+import { useUserStore } from "@/stores/user";
+
+const { user } = useUserStore();
 
 const { getStudent } = useStudentsStore();
 const { getFaculty } = useFacultiesStore();

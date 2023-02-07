@@ -4,7 +4,11 @@
       <h1 class="text-4xl font-medium">Courses</h1>
       <p>Below is a list of all available courses.</p>
     </div>
-    <RouterLink to="courses/new" class="btn-primary">
+    <RouterLink
+      to="courses/new"
+      class="btn-primary"
+      v-if="user.user_type == 'admin'"
+    >
       Add New Course
     </RouterLink>
   </div>
@@ -38,6 +42,10 @@
 </template>
 
 <script setup lang="ts">
+import { useUserStore } from "@/stores/user";
+
+const { user } = useUserStore();
+
 const courses = [
   {
     code: "CPT414",

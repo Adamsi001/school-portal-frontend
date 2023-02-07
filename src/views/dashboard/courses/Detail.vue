@@ -7,7 +7,13 @@
       <h1 class="text-4xl font-medium">Course Detail</h1>
       <p>These are the information available for this course.</p>
     </div>
-    <RouterLink to="detail/edit" class="btn-primary"> Edit Course </RouterLink>
+    <RouterLink
+      to="detail/edit"
+      class="btn-primary"
+      v-if="user.user_type == 'admin'"
+    >
+      Edit Course
+    </RouterLink>
   </div>
   <div class="card space-y-4">
     <div>
@@ -46,6 +52,10 @@
 </template>
 
 <script setup lang="ts">
+import { useUserStore } from "@/stores/user";
+
+const { user } = useUserStore();
+
 const course = {
   code: "CPT414",
   title: "Engineering Software the right way",
