@@ -551,12 +551,12 @@ router.beforeEach(async (to, from, next) => {
   if (to.matched.some((route) => route.meta.access_levels)) {
     let is_authorized = false;
 
-    if (to.meta.access_levels.includes("admin") && user.user_type !== "admin") {
+    if (to.meta.access_levels.includes("admin") && user.user_type == "admin") {
       is_authorized = true;
     }
     if (
       to.meta.access_levels.includes("student_adviser") &&
-      !user.is_student_adviser
+      user.is_student_adviser
     ) {
       is_authorized = true;
     } else if (!to.meta.access_levels) {
