@@ -15,12 +15,14 @@ const { user } = useUserStore();
 const route = useRoute();
 
 const dashboard_links = computed(() => {
-  let links: Dashboard_link[] = [{ title: "dashboard", href: "/" }];
+  let links: Dashboard_link[] = [
+    { title: "dashboard", href: "/" },
+    { title: "announcements", href: "/announcements" },
+  ];
 
   switch (user.user_type) {
     case "student":
       links.push(
-        { title: "announcements", href: "/announcements" },
         { title: "course registration", href: "/courses/registrations" },
         { title: "results", href: "/results" }
       );
@@ -50,10 +52,7 @@ const dashboard_links = computed(() => {
       break;
     case "staff":
       if (user.is_lecturer) {
-        links.push(
-          { title: "announcements", href: "/announcements" },
-          { title: "courses", href: "/courses" }
-        );
+        links.push({ title: "courses", href: "/courses" });
       }
       if (user.is_student_adviser) {
         links.push({ title: "students", href: "/users/students" });
