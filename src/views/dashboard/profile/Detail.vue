@@ -108,92 +108,91 @@ onBeforeMount(async () => {
       </div>
     </Dialog>
   </TransitionRoot>
+  <div class="flex justify-between items-center">
+    <div>
+      <h1 class="text-4xl font-medium">My Profile</h1>
+      <p>Here is your profile.</p>
+    </div>
+    <button class="btn-secondary" @click="openModal">Log Out</button>
+  </div>
   <div class="card space-y-4">
-    <div class="space-y-8">
-      <h1 class="text-4xl font-medium capitalize">
-        {{ user.first_name }} {{ user.last_name }}
-      </h1>
-      <div class="space-y-4">
-        <div class="grid grid-cols-3 gap-4">
-          <div>
-            <p class="font-semibold">First Name:</p>
-            <div class="field">
-              <p class="opacity-60">{{ user.first_name }}</p>
-            </div>
-          </div>
-          <div>
-            <p class="font-semibold">Middle Name:</p>
-            <div class="field">
-              <p class="opacity-60">
-                {{ user.middle_name || "-" }}
-              </p>
-            </div>
-          </div>
-          <div>
-            <p class="font-semibold">Last Name:</p>
-            <div class="field">
-              <p class="opacity-60">{{ user.last_name }}</p>
-            </div>
+    <div class="space-y-4">
+      <div class="grid grid-cols-3 gap-4">
+        <div>
+          <p class="font-semibold">First Name:</p>
+          <div class="field">
+            <p class="opacity-60 capitalize">{{ user.first_name }}</p>
           </div>
         </div>
-        <div class="grid grid-cols-2 gap-4">
-          <div>
-            <p class="font-semibold">Gender:</p>
-            <div class="field">
-              <p class="opacity-60">{{ user.gender || "-" }}</p>
-            </div>
-          </div>
-          <div>
-            <p class="font-semibold">
-              {{ user.user_type == "student" ? "Student" : "Staff" }} ID:
+        <div>
+          <p class="font-semibold">Middle Name:</p>
+          <div class="field">
+            <p class="opacity-60 capitalize">
+              {{ user.middle_name || "-" }}
             </p>
-            <div class="field">
-              <p class="opacity-60">{{ user.user_id }}</p>
-            </div>
           </div>
         </div>
-        <div
-          class="grid grid-cols-3 gap-4"
-          v-if="user.user_type == 'student' || user.is_lecturer"
-        >
-          <div>
-            <p class="font-semibold">Faculty:</p>
-            <div class="field">
-              <p class="opacity-60">{{ user_faculty }}</p>
-            </div>
-          </div>
-          <div>
-            <p class="font-semibold">Department:</p>
-            <div class="field">
-              <p class="opacity-60">{{ user_department }}</p>
-            </div>
-          </div>
-          <div v-if="user.user_type == 'student' || user.is_student_adviser">
-            <p class="font-semibold">Level:</p>
-            <div class="field">
-              <p class="opacity-60">{{ user.level }}</p>
-            </div>
+        <div>
+          <p class="font-semibold">Last Name:</p>
+          <div class="field">
+            <p class="opacity-60 capitalize">{{ user.last_name }}</p>
           </div>
         </div>
-        <div class="grid grid-cols-2 gap-4">
-          <div>
-            <p class="font-semibold">Email:</p>
-            <div class="field">
-              <p class="opacity-60">{{ user.email }}</p>
-            </div>
+      </div>
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <p class="font-semibold">Gender:</p>
+          <div class="field">
+            <p class="opacity-60 capitalize">{{ user.gender || "-" }}</p>
           </div>
-          <div v-if="user.user_type == 'student?'">
-            <p class="font-semibold">Matric Number:</p>
-            <div class="field">
-              <!-- <p class="opacity-60">{{ user.matric_number }}</p> -->
-            </div>
+        </div>
+        <div>
+          <p class="font-semibold">
+            {{ user.user_type == "student" ? "Student" : "Staff" }} ID:
+          </p>
+          <div class="field">
+            <p class="opacity-60">{{ user.user_id }}</p>
+          </div>
+        </div>
+      </div>
+      <div
+        class="grid grid-cols-3 gap-4"
+        v-if="user.user_type == 'student' || user.is_lecturer"
+      >
+        <div>
+          <p class="font-semibold">Faculty:</p>
+          <div class="field">
+            <p class="opacity-60">{{ user_faculty }}</p>
+          </div>
+        </div>
+        <div>
+          <p class="font-semibold">Department:</p>
+          <div class="field">
+            <p class="opacity-60">{{ user_department }}</p>
+          </div>
+        </div>
+        <div v-if="user.user_type == 'student' || user.is_student_adviser">
+          <p class="font-semibold">Level:</p>
+          <div class="field">
+            <p class="opacity-60">{{ user.level }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <p class="font-semibold">Email:</p>
+          <div class="field">
+            <p class="opacity-60">{{ user.email }}</p>
+          </div>
+        </div>
+        <div v-if="user.user_type == 'student?'">
+          <p class="font-semibold">Matric Number:</p>
+          <div class="field">
+            <!-- <p class="opacity-60">{{ user.matric_number }}</p> -->
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="flex justify-end">
-    <button class="btn-secondary" @click="openModal">Log Out</button>
   </div>
 </template>
 
