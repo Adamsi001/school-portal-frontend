@@ -49,11 +49,14 @@ const dashboard_links = computed(() => {
       );
       break;
     case "staff":
-      if (user.is_student_adviser) {
+      if (user.is_lecturer) {
         links.push(
-          { title: "students", href: "/users/students" },
-          { title: "announcements", href: "/announcements" }
+          { title: "announcements", href: "/announcements" },
+          { title: "courses", href: "/courses" }
         );
+      }
+      if (user.is_student_adviser) {
+        links.push({ title: "students", href: "/users/students" });
       }
   }
   return links;
