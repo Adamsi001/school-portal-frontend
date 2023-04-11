@@ -36,7 +36,7 @@ const dashboard_links = computed(() => {
           children: [
             { title: "students", href: "/students" },
             { title: "lecturers", href: "/lecturers" },
-            { title: "level advisers", href: "/level-advisers" },
+            { title: "level advisers", href: "/student-advisers" },
             { title: "admins", href: "/admins" },
           ],
         },

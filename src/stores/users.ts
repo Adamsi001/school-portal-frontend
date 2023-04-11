@@ -130,6 +130,69 @@ export const useLecturersStore = defineStore("lecturers", () => {
   };
 });
 
+export const useStudentAdvisersStore = defineStore("advisers", () => {
+  const advisers = ref({});
+  const isAdvisersEmpty = computed(() => advisers.value == {});
+
+  const fetchAdvisers = async () => {
+    await useFetch(`${USERS_API_URL}/student-advisers`).then((response) => {
+      response.map((adviser) => (advisers.value[adviser.id] = adviser));
+    });
+  };
+  const getAdviser = async (id) => {
+    let adviser = advisers.value[id];
+    if (!adviser) {
+      adviser = await useFetch(`${USERS_API_URL}/student-advisers/${id}`);
+    }
+    return adviser;
+  };
+  const getAdvisers = async () => {
+    if (isAdvisersEmpty) {
+      await fetchAdvisers();
+    }
+    return Object.values(advisers.value);
+  };
+  const addAdviser = async (form) => {
+    return await useFetch(`${USERS_API_URL}/student-advisers/`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(form),
+    }).then((data) => {
+      advisers.value[data.id] = data;
+    });
+  };
+  const editAdviser = async (form) => {
+    return await useFetch(`${USERS_API_URL}/student-advisers/${form.id}/`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        first_name: form.first_name,
+        middle_name: form.middle_name,
+        last_name: form.last_name,
+        email: form.email,
+        gender: form.gender,
+        faculty: form.faculty,
+        department: form.department,
+      }),
+    }).then(async (data) => {
+      advisers.value[form.id] = data;
+    });
+  };
+
+  return {
+    advisers,
+    fetchAdvisers,
+    addAdviser,
+    editAdviser,
+    getAdviser,
+    getAdvisers,
+  };
+});
+
 export const useStudentsStore = defineStore("students", () => {
   const students = ref({});
   const isStudentsEmpty = computed(() => students.value == {});

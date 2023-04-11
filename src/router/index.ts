@@ -411,6 +411,60 @@ const router = createRouter({
               ],
             },
             {
+              path: "student-advisers",
+              name: "student advisers",
+              component: () =>
+                import("../views/dashboard/users/student_advisers/App.vue"),
+              meta: {
+                title: "student advisers",
+              },
+              children: [
+                {
+                  path: "",
+                  name: "student advisers list",
+                  component: () =>
+                    import(
+                      "../views/dashboard/users/student_advisers/List.vue"
+                    ),
+                  meta: {
+                    title: "student advisers",
+                  },
+                },
+                {
+                  path: "new",
+                  name: "new student adviser",
+                  component: () =>
+                    import("../views/dashboard/users/student_advisers/New.vue"),
+                  meta: {
+                    title: "New student adviser",
+                  },
+                },
+                {
+                  path: ":id",
+                  name: "student adviser detail",
+                  component: () =>
+                    import(
+                      "../views/dashboard/users/student_advisers/Detail.vue"
+                    ),
+                  meta: {
+                    title: "student_adviser Detail",
+                    access_levels: ["admin"],
+                  },
+                },
+                {
+                  path: ":id/edit",
+                  name: "edit student adviser",
+                  component: () =>
+                    import(
+                      "../views/dashboard/users/student_advisers/Edit.vue"
+                    ),
+                  meta: {
+                    title: "Edit student adviser",
+                  },
+                },
+              ],
+            },
+            {
               path: "students",
               name: "Students",
               component: () =>
